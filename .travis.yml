@@ -1,2 +1,2 @@
 language: bash
-script: sh ./18745124_kadai3_tester.sh
+script: bash ./18745124_kadai3_tester.sh
