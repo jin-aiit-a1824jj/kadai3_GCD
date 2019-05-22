@@ -2,31 +2,37 @@
 
 echo `clear`                                                                                                                   
 
+result=0
+
 function main(){
     
    input_num_1=$(input_number "1つ目の整数を入力→ " "$1")
    if (( $? != 0  ));then
-       echo "1つ目の整数を入力 error! → $input_num_1"
-       echo "0より大きい正の整数を入力してください！"
-       exit 1
+       printf "1つ目の整数を入力 error! → $input_num_1\n"
+       printf "0より大きい正の整数を入力してください！\n"
+       result=1
+       return 1
    fi
 
    input_num_1=$(check_zero_start_number $input_num_1)
    if (( $input_num_1 == 0 ));then
-       echo "1つ目の整数 error! 入力値がゼロです！"
-       exit 1
+       printf "1つ目の整数 error! 入力値がゼロです！\n"
+       result=1
+       return 1
    fi
 
    input_num_2=$(input_number "2つ目の整数を入力→ " "$2")     
    if (( $? != 0 ));then
-       echo "2つ目の整数を入力 error! → $input_num_2"
-       echo "0より大きい正の整数を入力してください！"
-       exit 1
+       printf "2つ目の整数を入力 error! → $input_num_2\n"
+       printf "0より大きい正の整数を入力してください！\n"
+       result=1
+       return 1
    fi
    
    input_num_2=$(check_zero_start_number $input_num_2)
    if (( $input_num_2 == 0 ));then
-       echo "2つ目の整数 error! 入力値がゼロです！"
+       printf "2つ目の整数 error! 入力値がゼロです！\n"
+       result=1
        exit 1
    fi
 
@@ -46,7 +52,7 @@ function input_number(){
     else
         # echo "is not a number"
 	echo $var
-        exit 1
+        return 1
     fi
 }
 
@@ -81,5 +87,4 @@ function calc_gcd(){
 }
 
 main $1 $2
-
-exit 0
+exit $result
